@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ejercicio 2 — App del Clima</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="pageHeader">
+    <a class="backBtn" href="../index.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver al inicio
+    </a>
+    <div class="headerContent">
+      <div class="exerciseBadge">Ejercicio 02</div>
+      <h1>App del Clima</h1>
+      <p>API: <code>openweathermap.org/data/2.5/weather?q={city}&appid={key}</code></p>
+    </div>
+  </header>
+
+  <main class="mainContent">
+
+    <!-- Buscador -->
+    <div class="searchBox">
+      <div class="searchField">
+        <svg class="searchIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Escribe el nombre de una ciudad..."
+          autocomplete="off"
+        />
+      </div>
+      <button id="searchBtn">
+        <span id="searchBtnText">Buscar clima</span>
+        <div id="searchSpinner" class="btnSpinner" style="display:none"></div>
+      </button>
+    </div>
+
+    <!-- Chips de ciudades rápidas -->
+    <div class="quickCities">
+      <span class="quickLabel">Ciudades rápidas:</span>
+      <button class="cityChip" data-city="Bogotá">🇨🇴 Bogotá</button>
+      <button class="cityChip" data-city="Medellín">🇨🇴 Medellín</button>
+      <button class="cityChip" data-city="Cali">🇨🇴 Cali</button>
+      <button class="cityChip" data-city="London">🇬🇧 London</button>
+      <button class="cityChip" data-city="Tokyo">🇯🇵 Tokyo</button>
+      <button class="cityChip" data-city="New York">🇺🇸 New York</button>
+    </div>
+
+    <!-- Estado de error -->
+    <div id="errorBanner" class="errorBanner" style="display:none">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="errorText"></span>
+    </div>
+
+    <!-- Tarjeta del clima (oculta hasta buscar) -->
+    <div id="weatherCard" class="weatherCard" style="display:none">
+
+      <div class="weatherTop">
+        <div class="weatherLeft">
+          <div class="cityName" id="cityName"></div>
+          <div class="countryInfo" id="countryInfo"></div>
+          <div class="weatherDesc" id="weatherDesc"></div>
+        </div>
+        <div class="weatherRight">
+          <div class="weatherEmoji" id="weatherEmoji"></div>
+          <div class="temperature" id="temperature"></div>
+        </div>
+      </div>
+
+      <div class="statsGrid">
+        <div class="statBox">
+          <div class="statLabel">Sensación térmica</div>
+          <div class="statValue" id="feelsLike"></div>
+        </div>
+        <div class="statBox">
+          <div class="statLabel">Humedad</div>
+          <div class="statValue" id="humidity"></div>
+        </div>
+        <div class="statBox">
+          <div class="statLabel">Viento</div>
+          <div class="statValue" id="wind"></div>
+        </div>
+        <div class="statBox">
+          <div class="statLabel">Visibilidad</div>
+          <div class="statValue" id="visibility"></div>
+        </div>
+        <div class="statBox">
+          <div class="statLabel">Mín / Máx</div>
+          <div class="statValue" id="minMax"></div>
+        </div>
+        <div class="statBox">
+          <div class="statLabel">Presión</div>
+          <div class="statValue" id="pressure"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Estado vacío inicial (visible hasta la primera búsqueda) -->
+    <div id="emptyState" class="emptyState">
+      <div class="emptyIcon">🌍</div>
+      <p>Ingresa el nombre de una ciudad para ver el clima actual</p>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
