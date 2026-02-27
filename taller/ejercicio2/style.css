@@ -1,0 +1,334 @@
+/* ============================================================
+   style.css — Ejercicio 2: App del Clima
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #090f1a;
+  --surface: #0e1826;
+  --border: rgba(255,255,255,0.07);
+  --accent: #ff6b6b;
+  --accentSoft: rgba(255,107,107,0.12);
+  --text: #e8edf5;
+  --muted: #5a6a85;
+  --fontBody: 'DM Sans', sans-serif;
+  --fontDisplay: 'Syne', sans-serif;
+  --transition: 0.2s ease;
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 40% at 50% -5%, rgba(255,107,107,0.06) 0%, transparent 70%);
+  color: var(--text);
+  font-family: var(--fontBody);
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+/* === HEADER === */
+.pageHeader {
+  padding: 1.8rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 1.2rem;
+  transition: color var(--transition);
+}
+
+.backBtn:hover { color: var(--accent); }
+
+.exerciseBadge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(255,107,107,0.3);
+  border-radius: 20px;
+  padding: 0.25rem 0.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.pageHeader h1 {
+  font-family: var(--fontDisplay);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.5px;
+}
+
+.pageHeader p {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.pageHeader code {
+  background: rgba(255,107,107,0.1);
+  color: var(--accent);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* === MAIN === */
+.mainContent {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* === SEARCH BOX === */
+.searchBox {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.searchField {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0 1rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.searchField:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,107,107,0.1);
+}
+
+.searchIcon { color: var(--muted); flex-shrink: 0; }
+
+.searchField input {
+  flex: 1;
+  padding: 0.85rem 0;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--fontBody);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.searchField input::placeholder { color: var(--muted); }
+
+#searchBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--fontBody);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  min-width: 130px;
+  transition: background var(--transition), transform 0.1s;
+}
+
+#searchBtn:hover { background: #ff8e8e; }
+#searchBtn:active { transform: scale(0.97); }
+#searchBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btnSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* === QUICK CITIES === */
+.quickCities {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.quickLabel {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 0.2rem;
+  flex-shrink: 0;
+}
+
+.cityChip {
+  padding: 0.3rem 0.75rem;
+  background: var(--accentSoft);
+  border: 1px solid rgba(255,107,107,0.2);
+  border-radius: 20px;
+  color: var(--accent);
+  font-family: var(--fontBody);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.cityChip:hover { background: rgba(255,107,107,0.2); }
+
+/* === ERROR BANNER === */
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255,107,107,0.07);
+  border: 1px solid rgba(255,107,107,0.2);
+  border-radius: 10px;
+  color: #ff8e8e;
+  font-size: 0.86rem;
+  padding: 0.85rem 1rem;
+  line-height: 1.4;
+}
+
+/* === EMPTY STATE (visible al inicio) === */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 3.5rem 2rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.emptyIcon { font-size: 3.5rem; }
+
+/* === WEATHER CARD (oculta hasta buscar) === */
+.weatherCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Top row: left info + right emoji + temp */
+.weatherTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.8rem;
+  gap: 1rem;
+}
+
+.cityName {
+  font-family: var(--fontDisplay);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.countryInfo {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+.weatherDesc {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-top: 0.35rem;
+}
+
+.weatherRight {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.weatherEmoji {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.temperature {
+  font-family: var(--fontDisplay);
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+/* Stats grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.statBox {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+}
+
+.statLabel {
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 0.35rem;
+}
+
+.statValue {
+  font-family: var(--fontDisplay);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 500px) {
+  .statsGrid { grid-template-columns: 1fr 1fr; }
+  .temperature { font-size: 3rem; }
+  .cityName { font-size: 1.5rem; }
+}
