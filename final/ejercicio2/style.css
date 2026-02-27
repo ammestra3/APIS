@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;600;700&display=swap');
+
+:root {
+  --bg-dark: #0a0a0f;
+  --neon-yellow: #f5e642;
+  --text-main: #e0e0f0;
+  --text-dim: #6a6a8a;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'Rajdhani', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-body); }
+
+body {
+  background-color: var(--bg-dark);
+  background-image:
+    linear-gradient(rgba(245,230,66,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,230,66,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 0;
+}
+
+.game-header {
+  width: 100%; background: #10101a;
+  border-bottom: 2px solid var(--neon-yellow);
+  box-shadow: 0 0 30px rgba(245,230,66,0.1);
+  padding: 1.5rem 2rem; text-align: center; margin-bottom: 2rem;
+}
+.game-header h1 { font-family: var(--font-pixel); font-size: clamp(0.6rem, 2vw, 1rem); color: var(--neon-yellow); text-shadow: 0 0 15px rgba(245,230,66,0.5); letter-spacing: 4px; }
+.game-header p { font-size: 0.85rem; color: var(--text-dim); letter-spacing: 3px; margin-top: 0.5rem; text-transform: uppercase; }
+
+.card {
+  width: 90%; max-width: 470px;
+  background-color: #10101a; color: var(--text-main);
+  border: 1px solid rgba(245,230,66,0.15);
+  border-top: 2px solid var(--neon-yellow);
+  border-radius: 4px; padding: 40px 35px; text-align: center;
+  box-shadow: 0 0 40px rgba(245,230,66,0.08);
+}
+
+.search-bar { width: 100%; display: flex; align-items: center; justify-content: center; }
+
+.search-bar input {
+  border: 1px solid rgba(245,230,66,0.3); outline: 0;
+  background-color: #1a1a2e; color: var(--text-main);
+  padding: 10px 25px; height: 60px; border-radius: 2px;
+  flex: 1; margin-right: 16px; font-size: 18px;
+  transition: border-color 0.3s;
+}
+.search-bar input:focus { border-color: var(--neon-yellow); box-shadow: 0 0 10px rgba(245,230,66,0.2); }
+.search-bar input::placeholder { color: #6a6a8a; }
+
+.search-bar button {
+  border: 1px solid var(--neon-yellow); outline: 0;
+  background-color: rgba(245,230,66,0.1);
+  border-radius: 2px; width: 60px; height: 60px;
+  cursor: pointer; transition: all 0.3s;
+}
+.search-bar button:hover { background-color: var(--neon-yellow); }
+.search-bar button img { width: 16px; }
+
+.quickCities { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+
+.cityChip {
+  padding: 0.3rem 0.75rem;
+  background: rgba(245,230,66,0.06);
+  border: 1px solid rgba(245,230,66,0.2);
+  border-radius: 20px; color: var(--neon-yellow);
+  font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; transition: background 0.2s;
+}
+.cityChip:hover { background: rgba(245,230,66,0.15); }
+
+.weather-icon { width: 170px; margin-top: 30px; filter: drop-shadow(0 0 10px rgba(245,230,66,0.4)); }
+
+.weather h1 { font-size: 80px; font-weight: 700; color: var(--neon-yellow); text-shadow: 0 0 20px rgba(245,230,66,0.4); }
+
+.weather h2 { font-size: 1rem; font-weight: 600; margin-top: -10px; font-family: var(--font-pixel); letter-spacing: 3px; color: var(--text-main); }
+
+.details { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; margin-top: 50px; border-top: 1px solid rgba(245,230,66,0.1); padding-top: 1.5rem; }
+
+.col { display: flex; align-items: center; text-align: left; }
+.col img { width: 40px; margin-right: 10px; filter: drop-shadow(0 0 5px rgba(245,230,66,0.3)); }
+
+.humidity, .wind { font-size: 28px; margin-top: -6px; color: var(--neon-yellow); }
+.col p:last-child { font-size: 0.75rem; letter-spacing: 2px; color: #6a6a8a; text-transform: uppercase; }
+
+.weather { display: none; }
+
+.error {
+  text-align: left; margin: 10px 10px 0;
+  display: none; color: #ff2d78;
+  font-family: var(--font-pixel); font-size: 0.5rem; letter-spacing: 1px;
+}
+
+.btn-back {
+  position: fixed; bottom: 2rem; left: 2rem;
+  width: 55px; height: 55px; background: #10101a;
+  border: 2px solid var(--neon-yellow); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 1.3rem; color: var(--neon-yellow);
+  box-shadow: 0 0 20px rgba(245,230,66,0.3); transition: all 0.3s; z-index: 100;
+}
+.btn-back:hover { background: var(--neon-yellow); color: var(--bg-dark); transform: scale(1.1); box-shadow: 0 0 30px rgba(245,230,66,0.6); }
