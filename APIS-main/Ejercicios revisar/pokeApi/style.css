@@ -1,0 +1,541 @@
+/* =============================================
+   POKÉDEX - Estilos
+   Temática: Videojuego retro-futurista
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --clr-black: #1c1c1c;
+    --clr-white: #e0e0f0;
+    --bg-dark: #0a0a0f;
+    --bg-card: #10101a;
+    --neon-pink: #ff2d78;
+    --text-dim: #6a6a8a;
+    --font-pixel: 'Press Start 2P', monospace;
+    --font-body: 'Rajdhani', sans-serif;
+
+    --type-normal: #A8A878;
+    --type-fire: #F08030;
+    --type-water: #6890F0;
+    --type-grass: #78C850;
+    --type-electric: #F8D030;
+    --type-ice: #98D8D8;
+    --type-fighting: #C03028;
+    --type-poison: #A040A0;
+    --type-ground: #E0C068;
+    --type-flying: #A890F0;
+    --type-psychic: #F85888;
+    --type-bug: #A8B820;
+    --type-rock: #B8A038;
+    --type-ghost: #705898;
+    --type-dark: #705848;
+    --type-dragon: #7038F8;
+    --type-steel: #B8B8D0;
+    --type-fairy: #F0B6BC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--clr-white);
+    font-family: var(--font-body);
+}
+
+ul { list-style-type: none; }
+button { background-color: transparent; border: 0; }
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    background-image:
+        linear-gradient(rgba(255, 45, 120, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 45, 120, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* === HEADER === */
+header {
+    padding-block: 1.5rem;
+    background: var(--bg-card);
+    border-bottom: 2px solid var(--neon-pink);
+    box-shadow: 0 0 30px rgba(255, 45, 120, 0.15);
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    padding-inline: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Logo más grande */
+.nav img {
+    height: 55px;
+    width: auto;
+    filter: drop-shadow(0 0 12px rgba(255, 45, 120, 0.6));
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Botones de tipo más grandes y llamativos */
+.btn-header {
+    padding: 0.45rem 0.9rem;
+    border-radius: 100vmax;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+    font-family: var(--font-body);
+}
+
+.btn-header:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 14px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+}
+
+/* Botón ver todos especial */
+#ver-todos {
+    background: rgba(255,45,120,0.15);
+    color: var(--neon-pink);
+    border: 2px solid var(--neon-pink);
+}
+
+#ver-todos:hover {
+    background: var(--neon-pink);
+    color: #fff;
+}
+
+/* === MAIN === */
+main {
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* === GRID SIN ESPACIOS RAROS === */
+.pokemon-todos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    align-items: start;
+}
+
+@media screen and (max-width: 700px) {
+    .pokemon-todos { grid-template-columns: 1fr 1fr; }
+}
+
+@media screen and (max-width: 470px) {
+    .pokemon-todos { grid-template-columns: 1fr; }
+}
+
+/* === TARJETA POKÉMON === */
+.pokemon {
+    border-radius: 4px;
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 45, 120, 0.12);
+    border-top: 2px solid rgba(255, 45, 120, 0.5);
+    box-shadow: 0 0 20px rgba(255, 45, 120, 0.05);
+    padding: 1.2rem 1rem;
+    text-transform: uppercase;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemon:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(255, 45, 120, 0.2);
+    border-color: rgba(255, 45, 120, 0.4);
+}
+
+.pokemon-id-back {
+    position: absolute;
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+    font-weight: 800;
+    z-index: -1;
+    color: rgba(255, 45, 120, 0.06);
+    font-family: var(--font-body);
+    line-height: 1;
+}
+
+/* === IMAGEN MÁS GRANDE === */
+.pokemon-imagen {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+}
+
+.pokemon-imagen img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(255, 45, 120, 0.25));
+    transition: transform 0.3s;
+}
+
+.pokemon:hover .pokemon-imagen img {
+    transform: scale(1.1);
+}
+
+/* === INFO === */
+.pokemon-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.nombre-contenedor {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pokemon-id {
+    background-color: rgba(255, 45, 120, 0.1);
+    border: 1px solid rgba(255, 45, 120, 0.3);
+    color: var(--neon-pink);
+    padding: 0.2rem 0.5rem;
+    border-radius: 100vmax;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.pokemon-nombre {
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--clr-white);
+}
+
+/* === TIPOS MÁS GRANDES Y LLAMATIVOS === */
+.pokemon-tipos {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.25rem;
+}
+
+.tipo {
+    padding: 0.3rem 0.8rem;
+    border-radius: 100vmax;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* === STATS === */
+.pokemon-stats {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.25rem;
+}
+
+.stat {
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 100vmax;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+/* === COLORES DE TIPOS === */
+.normal { background-color: var(--type-normal); color: var(--clr-black); }
+.fire { background-color: var(--type-fire); color: var(--clr-black); }
+.water { background-color: var(--type-water); color: #fff; }
+.grass { background-color: var(--type-grass); color: var(--clr-black); }
+.electric { background-color: var(--type-electric); color: var(--clr-black); }
+.ice { background-color: var(--type-ice); color: var(--clr-black); }
+.fighting { background-color: var(--type-fighting); color: #fff; }
+.poison { background-color: var(--type-poison); color: #fff; }
+.ground { background-color: var(--type-ground); color: var(--clr-black); }
+.flying { background-color: var(--type-flying); color: var(--clr-black); }
+.psychic { background-color: var(--type-psychic); color: var(--clr-black); }
+.bug { background-color: var(--type-bug); color: var(--clr-black); }
+.rock { background-color: var(--type-rock); color: var(--clr-black); }
+.ghost { background-color: var(--type-ghost); color: #fff; }
+.dark { background-color: var(--type-dark); color: #fff; }
+.dragon { background-color: var(--type-dragon); color: #fff; }
+.steel { background-color: var(--type-steel); color: var(--clr-black); }
+.fairy { background-color: var(--type-fairy); color: var(--clr-black); }
+
+/* === FLECHA FLOTANTE VOLVER === */
+.btn-back {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 55px;
+    height: 55px;
+    background: var(--bg-card);
+    border: 2px solid var(--neon-pink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(255, 45, 120, 0.3);
+    transition: all 0.3s;
+    z-index: 100;
+}
+
+.btn-back:hover {
+    background: var(--neon-pink);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 45, 120, 0.6);
+}
+
+/* =============================================
+   BUSCADOR DE POKÉMON
+   ============================================= */
+
+.search-bar {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-bar input {
+    flex: 1;
+    background: #1a1a2e;
+    border: 1px solid rgba(255, 45, 120, 0.3);
+    border-radius: 2px;
+    padding: 0.6rem 1rem;
+    color: var(--clr-white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-bar input:focus {
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 10px rgba(255, 45, 120, 0.2);
+}
+
+.search-bar input::placeholder {
+    color: var(--text-dim);
+}
+
+.search-bar button {
+    background: rgba(255, 45, 120, 0.1);
+    border: 2px solid var(--neon-pink) !important;
+    color: var(--neon-pink);
+    font-family: var(--font-pixel);
+    font-size: 0.55rem;
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+.search-bar button:hover {
+    background: var(--neon-pink);
+    color: #fff;
+}
+
+/* =============================================
+   TARJETA DE RESULTADO DE BÚSQUEDA
+   ============================================= */
+
+.search-result {
+    max-width: 1100px;
+    margin: 1.5rem auto;
+    padding: 0 2rem;
+    justify-content: center;
+}
+
+.result-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 45, 120, 0.2);
+    border-top: 3px solid var(--neon-pink);
+    border-radius: 4px;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 40px rgba(255, 45, 120, 0.1);
+    flex-wrap: wrap;
+}
+
+.result-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 180px;
+    position: relative;
+}
+
+.result-left img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(255, 45, 120, 0.3));
+}
+
+.result-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 200px;
+}
+
+.result-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.result-title {
+    font-family: var(--font-pixel);
+    font-size: 0.6rem;
+    color: var(--neon-pink);
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(255, 45, 120, 0.4);
+}
+
+/* Habilidades */
+.habilidades-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.habilidad {
+    background: rgba(255, 45, 120, 0.1);
+    border: 1px solid rgba(255, 45, 120, 0.3);
+    color: var(--neon-pink);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100vmax;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Barras de estadísticas */
+.stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.stat-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    min-width: 100px;
+}
+
+.stat-track {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border-radius: 100vmax;
+    height: 8px;
+    overflow: hidden;
+}
+
+.stat-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-pink), #ff8fab);
+    border-radius: 100vmax;
+    box-shadow: 0 0 8px rgba(255, 45, 120, 0.4);
+}
+
+.stat-val {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--clr-white);
+    min-width: 30px;
+    text-align: right;
+}
+
+/* Botón cerrar */
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 45, 120, 0.1) !important;
+    border: 1px solid rgba(255, 45, 120, 0.3) !important;
+    color: var(--neon-pink) !important;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.close-btn:hover {
+    background: var(--neon-pink) !important;
+    color: #fff !important;
+}
+
+/* Tarjeta de error */
+.error-card {
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.error-msg {
+    font-family: var(--font-pixel);
+    font-size: 0.6rem;
+    color: var(--neon-pink);
+    text-align: center;
+    line-height: 2;
+    letter-spacing: 1px;
+}
