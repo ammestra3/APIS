@@ -1,9 +1,3 @@
-// app.js — ejercicio 3: pokédex
-// api: pokeapi.co/api/v2/pokemon/
-// técnica: fetch + async/await + cache
-// flujo: pantalla vacía → búsqueda individual muestra tarjeta con atributos
-//        "ver todos" / filtro por tipo muestran la grilla completa
-
 const pokeInput   = document.getElementById('pokeInput');
 const searchBtn   = document.getElementById('searchBtn');
 const verTodosBtn = document.getElementById('ver-todos');
@@ -14,7 +8,7 @@ const loaderWrap  = document.getElementById('loaderWrap');
 const errorMsg    = document.getElementById('errorMsg');
 const botonestipo = document.querySelectorAll('.btn-header[data-tipo]');
 
-let cache = []; // pokémon ya descargados
+let cache = []; 
 
 const fmtId   = (id)  => `#${String(id).padStart(3, '0')}`;
 const statNames = { hp:'hp', attack:'ataque', defense:'defensa', 'special-attack':'sp. atk', 'special-defense':'sp. def', speed:'velocidad' };
@@ -26,7 +20,7 @@ const typeColors = {
   steel:'#3a5060', fairy:'#8a2a55',
 };
 
-// --- helpers de UI ---
+
 const mostrarSolo = (el) => {
   [emptyState, loaderWrap, errorMsg, singleResult, listaPokemon].forEach(e => e.style.display = 'none');
   el.style.display = '';
@@ -37,7 +31,6 @@ const mostrarError = (msg) => {
   errorMsg.textContent = `❌ ${msg}`;
 };
 
-// --- fetch individual ---
 const fetchPoke = async (query) => {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(query.toLowerCase().trim())}`);
   if (res.status === 404) throw new Error(`"${query}" no encontrado. prueba con otro nombre o número.`);
@@ -45,7 +38,6 @@ const fetchPoke = async (query) => {
   return res.json();
 };
 
-// --- render tarjeta grande con atributos ---
 const renderDetalle = (p) => {
   const tipoMain = p.types[0]?.type.name || 'normal';
   const color    = typeColors[tipoMain] || '#333';
@@ -61,7 +53,7 @@ const renderDetalle = (p) => {
   document.getElementById('pokeXp').textContent        = p.base_experience ?? '—';
   document.getElementById('pokeAbilCount').textContent = p.abilities.length;
 
-  // estadísticas con barras
+  // estadísticas 
   const statsEl = document.getElementById('pokeStats');
   statsEl.innerHTML = '';
   p.stats.forEach(s => {
@@ -82,7 +74,7 @@ const renderDetalle = (p) => {
     `<span class="ability-tag${a.is_hidden ? ' hidden' : ''}">${a.ability.name}${a.is_hidden ? ' ⭐' : ''}</span>`
   ).join('');
 
-  // movimientos (primeros 10)
+  // movimientos 10 seg 
   document.getElementById('pokeMoves').innerHTML = p.moves.slice(0, 10).map(m =>
     `<span class="move-tag">${m.move.name}</span>`
   ).join('');
@@ -90,7 +82,7 @@ const renderDetalle = (p) => {
   mostrarSolo(singleResult);
 };
 
-// --- búsqueda individual ---
+// busca individualmente
 const buscar = async () => {
   const q = pokeInput.value.trim();
   if (!q) return;
@@ -109,7 +101,6 @@ const buscar = async () => {
   }
 };
 
-// --- cargar todos (lazy: solo si no se ha hecho ya) ---
 const cargarTodos = async () => {
   if (cache.length === 151) {
     renderGrilla(cache);
@@ -129,7 +120,7 @@ const cargarTodos = async () => {
   }
 };
 
-// --- render grilla ---
+// render 
 const renderGrilla = (lista) => {
   listaPokemon.innerHTML = '';
   lista.forEach(p => {
@@ -151,21 +142,20 @@ const renderGrilla = (lista) => {
         </div>
       </div>
     `;
-    // clic en tarjeta de grilla → muestra detalle
+    // muestra detales al hacer click
     div.addEventListener('click', () => { renderDetalle(p); window.scrollTo({ top: 0, behavior: 'smooth' }); });
     listaPokemon.appendChild(div);
   });
   mostrarSolo(listaPokemon);
 };
 
-// --- filtrar por tipo (usa cache si ya se cargó, sino carga primero) ---
 const filtrarTipo = async (tipo) => {
   if (cache.length < 151) await cargarTodos();
   const filtrados = cache.filter(p => p.types.some(t => t.type.name === tipo));
   renderGrilla(filtrados);
 };
 
-// --- eventos ---
+// eventos de buscar, cargar todos y filtro por tipo
 searchBtn.addEventListener('click', buscar);
 pokeInput.addEventListener('keydown', e => { if (e.key === 'Enter') buscar(); });
 verTodosBtn.addEventListener('click', cargarTodos);

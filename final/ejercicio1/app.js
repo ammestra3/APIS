@@ -1,7 +1,3 @@
-// app.js — ejercicio 1: galería de imágenes
-// api: jsonplaceholder.typicode.com/photos
-// técnica: fetch + async/await + try/catch
-
 const gallery      = document.getElementById('gallery');
 const loader       = document.getElementById('loader');
 const errorMsg     = document.getElementById('errorMsg');

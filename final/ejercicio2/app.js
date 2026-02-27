@@ -1,7 +1,3 @@
-// app.js — ejercicio 2: app del clima
-// api: openweathermap.org/data/2.5/weather
-// técnica: fetch + async/await + try/catch
-
 const apiKey    = '2c81fd19b10b427dbccef1634b448d1d';
 const apiURL    = (city) => `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
 
